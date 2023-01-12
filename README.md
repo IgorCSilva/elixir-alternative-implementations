@@ -70,6 +70,7 @@ Aqui podemos ver que a função get_price, definida no módulo IProduct, será s
 
 ## Execução
 Na raiz da pasta executar: `iex -S mix`
+<br>
 Em seguida executar: `Implements.Infrastructure.Main.run`
 
 ## Installation
