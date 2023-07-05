@@ -9,15 +9,25 @@ defmodule Implements.Implements do
 
     quote location: :keep do
 
-      unquote_interface = unquote(interface)
+      unquote_interface = unquote(interface) |> Map.from_struct()
 
-      defstruct unquote(functions) |> Enum.reduce(
-        unquote_interface |> Map.from_struct() |> Map.drop([:child]),
-        fn {key, value}, struct -> Map.put(struct, key, value)
-      end)
-      |> Map.to_list()
+      attributes = Map.get(unquote_interface, :attributes, %{})
+      default_functions = Map.get(unquote_interface, :functions, %{})
 
-      def _i_(), do: unquote(interface)
+      defstruct unquote(functions)
+                |> Enum.filter(fn {key, _} -> key in Map.keys(default_functions) end)
+                |> Enum.reduce(
+                  attributes
+                  |> Map.merge(%{__i__: unquote(interface)})
+                  |> IO.inspect(label: "ahhh")
+                  |> Map.merge(default_functions),
+                  fn {key, value}, struct ->
+                    Map.put(struct, key, value)
+                  end
+                )
+                |> Map.to_list()
+
+      # def _i_(), do: unquote(interface)
     end
   end
 end

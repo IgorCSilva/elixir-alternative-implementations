@@ -9,8 +9,10 @@ defmodule Implements.Infrastructure.Main do
     dress = %Dress{name: "Vestido Rosa", price: 100}
     dictionary = %Dictionary{name: "Dicionário de português", price: 500}
 
-    encapsulated_dress = Dress._i_().encapsulate(dress)
-    encapsulated_dictionary = Dictionary._i_().encapsulate(dictionary)
+    IO.inspect(dress)
+
+    encapsulated_dress = dress.__i__.encapsulate(dress)
+    encapsulated_dictionary = dictionary.__i__.encapsulate(dictionary)
 
     IO.puts("PRODUCT PRINT")
     ProductPrint.execute(encapsulated_dress)

@@ -1,4 +1,4 @@
-defmodule Implements.Domain.IProduct do
+defmodule UseBase.Domain.IProduct do
   defstruct(
     attributes: %{
       name: "",
