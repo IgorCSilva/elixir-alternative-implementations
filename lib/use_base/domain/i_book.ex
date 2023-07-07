@@ -34,7 +34,7 @@ defmodule UseBase.Domain.IBook do
     if __MODULE__ in data.__b__ do
       "IBook module - " <> data.name
     else
-      "#{__MODULE__} isn't an ancestor of #{data}."
+      "#{__MODULE__} isn't an ancestral of #{data}."
     end
   end
 

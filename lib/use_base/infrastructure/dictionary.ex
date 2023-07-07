@@ -38,7 +38,7 @@ defmodule UseBase.Infrastructure.Dictionary do
     ) do
       "Dictionary base: #{data.page.height} || #{super(data)}"
     else
-      false -> "#{__MODULE__} isn't an ancestor of #{data}."
+      false -> "#{__MODULE__} isn't an ancestral of #{data}."
     end
   end
 
