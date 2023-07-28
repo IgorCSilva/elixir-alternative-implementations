@@ -1,9 +1,9 @@
 defmodule UseBase.Infrastructure.MathLibrary do
-  import UseBase.UseBaseMacro
+  import Generations
 
-  usebase(
+  generate(
     %{
-      base: UseBase.Domain.ILibrary,
+      parents: UseBase.Domain.ILibrary,
       attributes: %{
         category: "Math",
         unavailable_books: []
@@ -24,7 +24,7 @@ defmodule UseBase.Infrastructure.MathLibrary do
     end
   end
 
-  def add_unavailable_book(%{__b__: _} = data, %{__b__: _} = book) do
+  def add_unavailable_book(%{__l__: _} = data, %{__l__: _} = book) do
     if data.@.is_my_lineage?(__MODULE__) and book.@.is_my_lineage?(IBook) do
       %{data | unavailable_books: [book | data.unavailable_books]}
     else
@@ -32,11 +32,13 @@ defmodule UseBase.Infrastructure.MathLibrary do
     end
   end
 
-  def count_books(%{__b__: _} = data) do
+  def count_books(%{__l__: _} = data) do
     if data.@.is_my_lineage?(__MODULE__) do
+
+      IO.inspect("COUNT BOOKS MATH")
       Enum.count(data.unavailable_books) + super(data)
     else
-      {:error, "Isn't leneage."}
+      {:error, "Isn't lineage."}
     end
   end
 end

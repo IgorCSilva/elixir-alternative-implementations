@@ -43,6 +43,8 @@ defmodule UseBase.UseBaseMacro do
       def make_child(_), do: nil
 
       def is_my_lineage?(module), do: module in %__MODULE__{}.__b__
+
+      # def change_generation()
     end
   end
 end

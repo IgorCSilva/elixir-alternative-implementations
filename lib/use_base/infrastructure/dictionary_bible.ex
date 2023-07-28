@@ -1,9 +1,9 @@
 defmodule UseBase.Infrastructure.DictionaryBible do
-  import UseBase.UseBaseMacro
+  import Generations
 
-  usebase(
+  generate(
     %{
-      base: UseBase.Infrastructure.Dictionary,
+      parents: UseBase.Infrastructure.Dictionary,
       attributes: %{
         book_one: "english"
       }

@@ -6,9 +6,12 @@ defmodule UseBase.Infrastructure.Main do
   alias UseBase.Infrastructure.DictionaryBible
   alias UseBase.Application.Book.Print, as: BookPrint
 
+  alias UseBase.Domain.ILibrary
   alias UseBase.Infrastructure.MathLibrary
   alias UseBase.Infrastructure.ScienceLibrary
   alias UseBase.Infrastructure.MathScienceLibrary
+
+  alias Generations.Utils.ManipulateGeneration
 
   def run do
     # dress = %Dress{name: "Vestido Rosa", price: 100}
@@ -48,25 +51,38 @@ defmodule UseBase.Infrastructure.Main do
     # IO.inspect(begginner_science.@.count_books(begginner_science))
 
 
-    begginner_ms = %MathScienceLibrary{}
+    ms_library = %MathScienceLibrary{}
 
-    IO.inspect(begginner_ms)
-    IO.inspect(begginner_ms.@.count_books(begginner_ms))
+    IO.inspect(ms_library)
+    IO.inspect(ms_library.@.count_books(ms_library))
 
-    begginner_ms = begginner_ms.@.add_book(begginner_ms, dictionary)
+    ms_library = ms_library.@.add_book(ms_library, dictionary)
 
-    IO.inspect(begginner_ms)
-    IO.inspect(begginner_ms.@.count_books(begginner_ms))
+    IO.inspect(ms_library)
+    IO.inspect(ms_library.@.count_books(ms_library))
 
-    begginner_ms = begginner_ms.@.add_unavailable_book(begginner_ms, dictionary_bible)
+    ms_library = ms_library.@.add_unavailable_book(ms_library, dictionary_bible)
 
-    IO.inspect(begginner_ms)
-    IO.inspect(begginner_ms.@.count_books(begginner_ms))
+    IO.inspect(ms_library)
+    IO.inspect(ms_library.@.count_books(ms_library))
 
-    begginner_ms = begginner_ms.@.add_sell_book(begginner_ms, dictionary_bible)
+    ms_library = ms_library.@.add_sell_book(ms_library, dictionary_bible)
 
-    IO.inspect(begginner_ms)
-    IO.inspect(begginner_ms.@.count_books(begginner_ms))
+    IO.inspect(ms_library)
+    IO.inspect(ms_library.@.count_books(ms_library))
+
+    m_library = ManipulateGeneration.change_generation(ms_library, MathLibrary)
+
+    IO.inspect(m_library)
+
+    i_library = ManipulateGeneration.change_generation(ms_library, ILibrary)
+
+    IO.inspect(i_library)
+
+    i_to_m_library = ManipulateGeneration.change_generation(i_library, MathLibrary)
+
+    IO.inspect(i_to_m_library)
+    IO.inspect(ManipulateGeneration.raw_content(i_to_m_library))
 
     # IO.inspect(dictionary_bible)
     # IO.inspect(dictionary.@.make_child(dictionary_bible, dictionary))

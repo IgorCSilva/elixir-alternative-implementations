@@ -1,4 +1,4 @@
-defmodule UseBase.Domain.Utils.Maps do
+defmodule Utils.Maps do
 
   def merge(data1, nil), do: data1
   def merge(nil, data2), do: data2

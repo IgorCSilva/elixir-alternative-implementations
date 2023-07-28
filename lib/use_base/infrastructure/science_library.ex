@@ -1,9 +1,9 @@
 defmodule UseBase.Infrastructure.ScienceLibrary do
-  import UseBase.UseBaseMacro
+  import Generations
 
-  usebase(
+  generate(
     %{
-      base: UseBase.Domain.ILibrary,
+      parents: UseBase.Domain.ILibrary,
       attributes: %{
         category: "Science",
         sell_books: []
@@ -24,19 +24,20 @@ defmodule UseBase.Infrastructure.ScienceLibrary do
     end
   end
 
-  def add_sell_book(%{__b__: _} = data, %{__b__: _} = book) do
+  def add_sell_book(%{__l__: _} = data, %{__l__: _} = book) do
     if data.@.is_my_lineage?(__MODULE__) and book.@.is_my_lineage?(IBook) do
       %{data | sell_books: [book | data.sell_books]}
     else
-      {:error, "Isn't leneage."}
+      {:error, "Isn't lineage."}
     end
   end
 
-  def count_books(%{__b__: _} = data) do
+  def count_books(%{__l__: _} = data) do
     if data.@.is_my_lineage?(__MODULE__) do
+      IO.inspect("COUNT BOOKS SCIENCE")
       Enum.count(data.sell_books) + super(data)
     else
-      {:error, "Isn't leneage."}
+      {:error, "Isn't lineage."}
     end
   end
 end

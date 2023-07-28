@@ -1,9 +1,9 @@
 defmodule UseBase.Infrastructure.Dictionary do
-  import UseBase.UseBaseMacro
+  import Generations
 
-  usebase(
+  generate(
     %{
-      base: UseBase.Domain.IBook,
+      parents: UseBase.Domain.IBook,
       attributes: %{
         authors: ['-', :dan, ['-', '-', :y, %{person: %{name: ""}}]],
         page: %{
@@ -32,7 +32,7 @@ defmodule UseBase.Infrastructure.Dictionary do
   def get_name(%__MODULE__{} = data) do
     "Dictionary module: " <> data.name <> " || " <> super(data)
   end
-  def get_name(%{__b__: l} = data) do
+  def get_name(%{__l__: l} = data) do
     with(
       true <- __MODULE__ in l
     ) do
@@ -48,12 +48,12 @@ defmodule UseBase.Infrastructure.Dictionary do
   end
 
   # Use base function.
-  def get_dictionary_price(%__MODULE__{__b__: [base | _]} = data) do
+  def get_dictionary_price(%__MODULE__{__l__: [base | _]} = data) do
     "Dictionary module: #{base.get_price(data)}"
   end
 
   # Use base function.
-  def get_dictionary_stock(%__MODULE__{__b__: [base | _]} = data) do
+  def get_dictionary_stock(%__MODULE__{__l__: [base | _]} = data) do
     "Dictionary module: #{base.get_total_stock(data)}"
   end
 end

@@ -1,7 +1,13 @@
 defmodule UseBase.Domain.ILibrary do
-  defstruct(
-    category: "",
-    books: []
+  import Generations
+
+  generate(
+    %{
+      structure: %{
+        category: "",
+        books: []
+      }
+    }
   )
 
   alias UseBase.Domain.IBook
@@ -16,7 +22,7 @@ defmodule UseBase.Domain.ILibrary do
     end
   end
 
-  def add_book(%{__b__: _} = data, %{__b__: _} = book) do
+  def add_book(%{__l__: _} = data, %{__l__: _} = book) do
     if data.@.is_my_lineage?(__MODULE__) and book.@.is_my_lineage?(IBook) do
       %{data | books: [book | data.books]}
     else
@@ -24,8 +30,8 @@ defmodule UseBase.Domain.ILibrary do
     end
   end
 
-  def count_books(%{__b__: _} = data) do
-    if data.@.is_my_lineage?(__MODULE__) do
+  def count_books(%{@: funcs} = data) do
+    if funcs.is_my_lineage?(__MODULE__) do
       Enum.count(data.books)
     else
       {:error, "Isn't leneage."}

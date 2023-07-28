@@ -1,17 +1,18 @@
 defmodule UseBase.Infrastructure.MathScienceLibrary do
-  import UseBase.UseBaseMacro
+  import Generations
 
-  usebase(
+  generate(
     %{
-      base: [UseBase.Infrastructure.MathLibrary, UseBase.Infrastructure.ScienceLibrary],
+      parents: [UseBase.Infrastructure.MathLibrary, UseBase.Infrastructure.ScienceLibrary],
       attributes: %{
         category: "MathScience"
       }
     }
   )
 
-  def count_books(%{__b__: _} = data) do
+  def count_books(%{__l__: _} = data) do
     if data.@.is_my_lineage?(__MODULE__) do
+      IO.inspect("COUNT BOOKS MATH SCIENCE")
       Enum.count(data.sell_books) + super(data)
     else
       {:error, "Isn't leneage."}
